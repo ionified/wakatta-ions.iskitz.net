@@ -3,20 +3,24 @@
 +
 { todos:
     [ "create a healthy mix of right and wrong answers"
+    , "add romaji"
+    , "enable creating hiragana, katakana, and romaji pairs"
     , "swipe left decreases display speed, right increases it"
     , "swipe up shows yes indicator above, down shows no indicator below"
     , "speed up or down automatically based on user's guess success speed"
     , "show maturing avatar representing proficiency"
-    , "combine letters as success plateaus; i.e. ひろこ : ヒロコ and はい : ハイ"
+    , "combine letters as success plateaus; i.e.:"
+    , "   ひろこ : ヒロコ and はい : ハイ"
     , "make a vocabulary game"
+    , "   enable word : image pairs"
     , "make a statement confirmation game"
     ]
 }//+todos
 
 +
 { re:
-    { id: "scope"
-    , is: "A shared scope for, 日本のかなぐえむ, a Japanese kana alphabet game's ions"
+    { id: "ions"
+    , is: "Enables ion communication within, 日本のかなぐえむ, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
     , at: "2016.01.23..24-08.00"
     , in: "san-jose.ca.usa.earth"
@@ -51,7 +55,7 @@
       this.on.get = this;
       Object.prototype.valueOf = this.on;
     }
-}//+scope
+}//+ions
 
 +
 { re:
@@ -72,14 +76,14 @@
         , view  = this.view
         ;
 
-      view.addEventListener ("touchstart" , guess , false);
-      view.addEventListener ("touchmove"  , guess , false);
-      view.addEventListener ("touchend"   , guess , false);
+      view.addEventListener ("touchstart" , guess, false);
+      view.addEventListener ("touchmove"  , guess, false);
+      view.addEventListener ("touchend"   , guess, false);
 
-      view.addEventListener ("mousedown", guess , false);
-      view.addEventListener ("mousemove", guess , false);
-      view.addEventListener ("mouseout" , guess , false);
-      view.addEventListener ("mouseup"  , guess , false);
+      view.addEventListener ("mousedown"  , guess, false);
+      view.addEventListener ("mousemove"  , guess, false);
+      view.addEventListener ("mouseout"   , guess, false);
+      view.addEventListener ("mouseup"    , guess, false);
     },
 
   guess:
@@ -112,7 +116,7 @@
           case "mouseup":
             guess = from.x = from.y = to.x = to.y = null;
             game.stop ()
-            view.maybe();
+            view.reset();
             game.start();
             return;
         }//switch
@@ -144,8 +148,8 @@
       this.view.className = "no";
     },
 
-  maybe:
-    function maybe () {
+  reset:
+    function reset () {
       this.view.className = "";
     },
 
@@ -231,12 +235,12 @@
         ;
 
       function playing () {
-        var hGuess = (Math.random() * rounds) | 0
-          , kGuess = (Math.random() * rounds) | 0
+        var nextH = (Math.random() * rounds) | 0
+          , nextK = (Math.random() * rounds) | 0
           ;
 
-        game.answer = hGuess == kGuess;
-        view.show (hiragana [hGuess] + " : " + katakana [kGuess]);
+        game.answer = nextH == nextK;
+        view.show (hiragana [nextH] + " : " + katakana [nextK]);
 
         played ? ++played : (played = 1);
         (played == rounds) && stop();
