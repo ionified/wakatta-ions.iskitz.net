@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+html, body
+{ height   : 100%
+; width    : 100%
+; margin   : 0
+; padding  : 0
+; overflow : hidden
+}
+
+body
+{ color      : #777
+; font-size  : 106px
+; margin-top : 25%
+; text-align : center
+}
+
+body.yes
+{ background-color : #5f5
+}
+
+body.no
+{ background-color : #f55
+}
