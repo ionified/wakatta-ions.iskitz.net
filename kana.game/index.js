@@ -71,6 +71,11 @@
       var guess = this.guess()
         , view  = this.view
         ;
+
+      view.addEventListener ("touchstart" , guess , false);
+      view.addEventListener ("touchmove"  , guess , false);
+      view.addEventListener ("touchend"   , guess , false);
+
       view.addEventListener ("mousedown", guess , false);
       view.addEventListener ("mousemove", guess , false);
       view.addEventListener ("mouseout" , guess , false);
@@ -91,15 +96,18 @@
         event.preventDefault();
 
         switch (event.type) {
+          case "touchstart":
           case "mousedown":
             move = from;
             break;
 
+          case "touchmove":
           case "mousemove":
             if (from.y === null || guess !== null) return;
             move = to;
             break;
 
+          case "touchend":
           case "mouseout":
           case "mouseup":
             guess = from.x = from.y = to.x = to.y = null;
@@ -109,8 +117,8 @@
             return;
         }//switch
 
-        move.x = event.clientX;
-        move.y = event.clientY;
+        move.x = event.pageX;
+        move.y = event.pageY;
 
         if (to.y === null) return;
 
