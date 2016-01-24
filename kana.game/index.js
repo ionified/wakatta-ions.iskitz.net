@@ -2,7 +2,8 @@
 
 +
 { todos:
-    [ "create a healthy mix of right and wrong answers"
+    [ "add a learn mode that only shows right answers"
+    , "create a healthy mix of right and wrong answers"
     , "add romaji"
     , "enable creating hiragana, katakana, and romaji pairs"
     , "swipe left decreases display speed, right increases it"
@@ -20,7 +21,7 @@
 +
 { re:
     { id: "ions"
-    , is: "Enables ion communication within, 日本のかなぐえむ, a Japanese kana alphabet game"
+    , is: "Enables ion communication within, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
     , at: "2016.01.23..24-08.00"
     , in: "san-jose.ca.usa.earth"
@@ -60,13 +61,13 @@
 +
 { re:
     { id: "view"
-    , is: "A web interface for, 日本のかなぐえむ, a Japanese kana alphabet game"
+    , is: "A web interface for, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
     , at: "2016.01.15..24-08.00"
     , in: "san-jose.ca.usa.earth"
     },
 
-  title     : document.title = "日本のかなぐえむ",
+  title     : document.title = "かなゲーム",
   view      : document.body,
   swipeSize : 10,
 
@@ -163,7 +164,7 @@
 +
 { re:
     { id: "game"
-    , is: "日本のかなぐえむ, a japanese kana alphabet game"
+    , is: "かなゲーム, a japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
     , at: "2016.01.15..24-08.00"
     , in: "san-jose.ca.usa.earth"
@@ -178,7 +179,7 @@
     ["ア","ン"],
 
   go:
-    function 日本のかなぐえむ () {
+    function かなゲーム () {
       with (this) {
         make ([hiragana, katakana]);
         this.view = get.view;
