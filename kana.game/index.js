@@ -23,7 +23,7 @@
     { id: "ions"
     , is: "An ion communication hub within, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
-    , at: "2016.01.23..26-08.00"
+    , at: "2016.01.23...26-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -62,9 +62,9 @@
 { re:
     { id: "view"
     , is: "A web interface for, かなゲーム, a Japanese kana alphabet game"
-    , by: "Michael Lee, iskitz.net"
-    , at: "2016.01.15..24-08.00"
-    , in: "san-jose.ca.usa.earth"
+    , by: "Michael Lee, iskitz.net, @iskitz"
+    , at: "2016.01.15...24-08.00"
+    , in: "san-jose.california.usa.earth"
     },
 
   title     : document.title = "かなゲーム",
@@ -165,9 +165,9 @@
 { re:
     { id: "game"
     , is: "かなゲーム, a japanese kana alphabet game"
-    , by: "Michael Lee, iskitz.net"
-    , at: "2016.01.15..24-08.00"
-    , in: "san-jose.ca.usa.earth"
+    , by: "Michael Lee, iskitz.net, @iskitz"
+    , at: "2016.01.15...24-08.00"
+    , in: "san-jose.california.usa.earth"
     },
 
   on: {view:'view'},           //idea: get 'view' then store in this ion as 'view'
