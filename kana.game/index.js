@@ -2,8 +2,8 @@
 
 +
 { todos:
-    [ "add a learn mode that only shows right answers"
-    , "create a healthy mix of right and wrong answers"
+    [ "integrate script loading"
+    , "add a learn mode that only shows right answers"
     , "add romaji"
     , "enable creating hiragana, katakana, and romaji pairs"
     , "swipe left decreases display speed, right increases it"
@@ -21,49 +21,102 @@
 +
 { re:
     { id: "ions"
+    , of: "かなゲーム"
     , is: "An ion communication hub within, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net"
-    , at: "2016.01.23...26-08.00"
+    , at: "2016.01.23...03.06-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
   all:
-    {},
+    { ajile: {next: []}
+    },
 
-  on:
-    function on () {
+  onIon:
+    function onIon () {
       var id  = this.id || (this.re && this.re.id)
-        , get = on.get.all
+        , ions = onIon.ions
+        , ion = ions.all
         ;
 
       switch (true) {
         case !!id || 'id' in this:
-          get [id] = this;
+          ion [id] = this;
+          break;
+
+        case !!this.on || 'on' in this:
+          ions.on (this);
+          break;
+
+        case !!this.get || 'get' in this:
+          ions.get (this);
           break;
 
         default:
           for (var thing in this) {
-            get [thing] = this [thing];
+            ion [thing] = this [thing];
           }
       }
 
-      !(this.get || 'get' in this) && (this.get = get);
+      !(this.ions || 'ions' in this) && (this.ions = ions);
       typeof this.go == "function" && this.go();
     },
 
+  on:
+    function on (ion)
+      { var thing = ion.on;
+
+        switch (true)
+          { case Array.isArray (thing):
+              for (var next=thing.length; next--; on (thing [next]));
+              return;
+
+            case typeof thing == "object":
+              //td: {like:{blah:[],ha:true}}
+              return;
+
+            default:
+              //td: locate thing before trying to get it
+              +{get:thing};
+              return;
+          } //switch
+      }, //on()
+
+  get:
+    function get (ion)
+      { var things  = ion.get
+          , next    = ajile.next
+          ;
+
+        switch (true)
+          { case Array.isArray (things):
+              next.concat (things);
+              return;
+
+            case typeof thing == "object":
+              //td: {get: {ion|js|:"path", async:true||false, cache:true||false}}
+              return;
+
+            default:
+              next.push (things);
+              return;
+          } //switch
+      },
+
   valueOf:
     function valueOf () {
-      this.on.get = this;
-      Object.prototype.valueOf = this.on;
+      this.onIon.ions = this;
+      Object.prototype.valueOf = this.onIon;
     }
 }//+ions
 
 +
 { re:
     { id: "view"
+    , of: "かなゲーム"
     , is: "A web interface for, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...24-08.00"
+    , at: "2016.01.15...03.06-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -90,7 +143,7 @@
   guess:
     function guess () {
       var view  = this
-        , game  = view.get['game']
+        , game  = view.ions.all['engine']
         , from  = {y:null}
         , to    = {y:null}
         , guess = null
@@ -163,14 +216,16 @@
 
 +
 { re:
-    { id: "game"
+    { id: "engine"
+    , of: "かなゲーム"
     , is: "かなゲーム, a japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...24-08.00"
+    , at: "2016.01.15...03.06-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
-  on: {view:'view'},           //idea: get 'view' then store in this ion as 'view'
+  on:
+    ["kana", "view"],
 
   hiragana:
     ["あ","ん"], // uni:12450...
@@ -182,7 +237,7 @@
     function かなゲーム () {
       with (this) {
         make ([hiragana, katakana]);
-        this.view = get.view;
+        this.view = ions.all.view;
         view.sense ();
         start ();
       }
@@ -207,7 +262,7 @@
        alphabet [next] = character (code);
     },
 
-  speed: 2500||"ms",
+  speed: 5000||"ms",
 
   start:
     function start () {
@@ -223,6 +278,7 @@
     },
 
   answer: false,
+  ease  : 4,//40%
 
   play:
     function play() {
@@ -237,7 +293,8 @@
 
       function playing () {
         var nextH = (Math.random() * rounds) | 0
-          , nextK = (Math.random() * rounds) | 0
+          , match = nextH % 10 <= game.ease
+          , nextK = match ? nextH : (Math.random() * rounds) | 0
           ;
 
         game.answer = nextH == nextK;
@@ -250,6 +307,6 @@
       (game.play = playing)();
     }
 
-}//+game
+}//+engine
 
 ;
