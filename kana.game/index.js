@@ -2,7 +2,8 @@
 
 +
 { todos:
-    [ "integrate script loading"
+    [ "move +view and +game ions to their own scripts"
+    , "load alphabets via the +kana ion instead of generating them via +game.make()"
     , "add a learn mode that only shows right answers"
     , "add romaji"
     , "enable creating hiragana, katakana, and romaji pairs"
@@ -34,9 +35,9 @@
 
   onIon:
     function onIon () {
-      var id  = this.id || (this.re && this.re.id)
-        , ions = onIon.ions
-        , ion = ions.all
+      var id    = this.id || (this.re && this.re.id)
+        , ions  = onIon.ions
+        , ion   = ions.all
         ;
 
       switch (true) {
@@ -104,11 +105,11 @@
       },
 
   valueOf:
-    function valueOf () {
-      this.onIon.ions = this;
-      Object.prototype.valueOf = this.onIon;
-    }
-}//+ions
+    function valueOf ()
+      {   this.onIon.ions           = this
+      ;   Object.prototype.valueOf  = this.onIon
+      }
+} //+ions
 
 +
 { re:
@@ -143,7 +144,7 @@
   guess:
     function guess () {
       var view  = this
-        , game  = view.ions.all['engine']
+        , game  = view.ions.all['game']
         , from  = {y:null}
         , to    = {y:null}
         , guess = null
@@ -212,11 +213,11 @@
       this.view.innerHTML = thing;
     }
 
-}//+view
+} //+view
 
 +
 { re:
-    { id: "engine"
+    { id: "game"
     , of: "かなゲーム"
     , is: "かなゲーム, a japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
@@ -234,14 +235,14 @@
     ["ア","ン"],
 
   go:
-    function かなゲーム () {
-      with (this) {
-        make ([hiragana, katakana]);
-        this.view = ions.all.view;
-        view.sense ();
-        start ();
-      }
-    },
+    function かなゲーム ()
+      { with (this)
+          { make ([hiragana, katakana])
+          ; this.view = ions.all.view
+          ; view.sense ()
+          ; start ()
+          }
+      },
 
   make:
     function make (alphabet) {
@@ -265,48 +266,60 @@
   speed: 5000||"ms",
 
   start:
-    function start () {
-      with (this) {
-        play();
-        stop.id = setInterval (play, speed);
-      }
-    },
+    function start ()
+      { with (this)
+          { play()
+          ; stop.id = setInterval (play, speed)
+          }
+      },
 
   stop:
-    function stop () {
-      clearInterval (stop.id);
-    },
+    function stop ()
+      { clearInterval (stop.id);
+      },
 
   answer: false,
-  ease  : 4,//40%
+  ease  : 5, //50% easy: 1=10%, 2, 3, 4, 5=50%, 6, 7, 8, 9, 10=100%
 
   play:
     function play() {
+      +
+      { re:
+          { id: "game.play",
+            it:
+              [ "Decides which pairs of letters to show using randomness"
+              , "Decides which pairs should match using the +game.ease randomness threshold"
+              , "Sends letter pairs to the view for display"
+              , "Stops the game after showing as many matches as there are letters"
+              ]
+          }
+      };
+
       var game      = this
         , view      = game.view
         , stop      = game.stop
         , hiragana  = game.hiragana
         , katakana  = game.katakana
-        , rounds    = hiragana.length
+        , letters   = hiragana.length
         , played
         ;
 
-      function playing () {
-        var nextH = (Math.random() * rounds) | 0
-          , match = nextH % 10 <= game.ease
-          , nextK = match ? nextH : (Math.random() * rounds) | 0
-          ;
+      function playing ()
+        { var nextH = (Math.random() * letters) | 0
+            , match = game.ease > ((Math.random() * 10 + 1) | 0)
+            , nextK = match ? nextH : (Math.random() * letters) | 0
+            ;
 
-        game.answer = nextH == nextK;
-        view.show (hiragana [nextH] + " : " + katakana [nextK]);
+          game.answer = nextH == nextK;
+          view.show (hiragana [nextH] + " : " + katakana [nextK]);
 
-        played ? ++played : (played = 1);
-        (played == rounds) && stop();
-      }
+          match && (played ? ++played : played = 1);
+          (played >= letters) && stop();
+        }
 
       (game.play = playing)();
-    }
+    } //play()
 
-}//+engine
+} //+game
 
 ;
