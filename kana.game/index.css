@@ -1,25 +1,36 @@
 @charset "UTF-8";
 
 html, body
-{ height   : 100%
-; width    : 100%
-; margin   : 0
-; padding  : 0
-; overflow : hidden
-}
+  { height   : 100%
+  ; width    : 100%
+  ; margin   : 0
+  ; padding  : 0
+  ; overflow : hidden
+  }
 
 body
-{ color      : #777
-; font-family: "Hiragino Mincho ProN"
-; font-size  : 106px
-; margin-top : 25%
-; text-align : center
-}
+  { font-family: "Hiragino Mincho ProN"
+  ; font-size  : 106px
+  ; margin-top : 25%
+  ; text-align : center
+  }
 
 body.yes
-{ background-color : #5f5
-}
+  { background-color : #5f5
+  }
 
 body.no
-{ background-color : #f55
-}
+  { background-color : #f55
+  }
+
+body,
+body.yes,
+body.no
+  { animation: 2.5s infinite alternate fade
+  }
+
+@keyframes fade
+  { from {opacity: 0%  ; color: #fff}
+  /*50%  {opacity: 100%}*/
+    to   {opacity: 100%; color: #777}
+  }
