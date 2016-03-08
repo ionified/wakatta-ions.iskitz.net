@@ -4,6 +4,7 @@
 { todos:
     [ "move +view and +game ions to their own scripts"
     , "load alphabets via the +kana ion instead of generating them via +game.make()"
+    , "manage animation behavior from +view"
     , "add a learn mode that only shows right answers"
     , "add romaji"
     , "enable creating hiragana, katakana, and romaji pairs"
@@ -43,7 +44,7 @@
       switch (true)
         { case !!id || 'id' in this
             :  ion [id] = this
-            ; break
+            ;  break
             ;
           case !!this.on || 'on' in this
             :  ions.on (this)
@@ -74,12 +75,12 @@
               ;
             case typeof thing == "object"
               :  //td: {like:{blah:[],ha:true}}
-              ; return
+              ;  return
               ;
             default
               :  //td: locate thing before trying to get it
               ;  +{get:thing}
-              ; return
+              ;  return
           }
       }, //on()
 
