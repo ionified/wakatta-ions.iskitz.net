@@ -118,7 +118,7 @@
     , of: "かなゲーム"
     , is: "A web interface for, かなゲーム, a Japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...03.08-08.00"
+    , at: "2016.01.15...03.09-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -144,6 +144,21 @@
 
   guess:
     function guess () {
+      +
+      { re:
+          { id: "view.guess",
+            it:
+              [ "Determines Yes, No, or Skip choice based on touch and movement input"
+              , "Yes is any touch + upward movement greater than or equal to +view.swipeSize pixels"
+              , "No  is any touch + upward movement less than +view.swipeSize pixels"
+              , "Skip's any touch and release with movement of less than +view.swipeSize pixels"
+              , "Waits for movement input to complete before continuing game play"
+              , "Calculates score by sending choice to +game.score()"
+              , "Displays score via +view.show()"
+              ]
+          }
+      }; //re.view.guess()
+
       var view  = this
         , game  = view.ions.all['game']
         , from  = {y:null}
@@ -183,7 +198,7 @@
           if (to.y === null) return;
 
           var change = from.y - to.y
-            , answer = true
+            , answer = false
             ;
 
           if (Math.abs (change) >= view.swipeSize)
@@ -191,12 +206,12 @@
             ;  guess  = change < 0
             ;  answer = guess == game.answer
             ;  answer ? view.yes() : view.no()
-            ;  view.show ({ score: game.score (answer) })
+            ;  view.show ({score: game.score (answer)})
             }
-        }//guessing()
+        } //+view.guess.guessing()
 
       return (view.guess = guessing);
-    },
+    }, //+view.guess()
 
   yes:
     function yes ()
@@ -229,7 +244,7 @@
     , of: "かなゲーム"
     , is: "かなゲーム, a japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...03.08-08.00"
+    , at: "2016.01.15...03.09-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -303,7 +318,7 @@
               , "Stops the game after showing as many matches as there are letters"
               ]
           }
-      }; //re.game.play
+      }; //re.game.play()
 
       var game      = this
         , view      = game.view
@@ -328,7 +343,7 @@
         }
 
       (game.play = playing)();
-    }, //play()
+    }, //+game.play()
 
   score:
     function score (answer)
