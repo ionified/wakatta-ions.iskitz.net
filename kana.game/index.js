@@ -216,7 +216,7 @@
   show:
     function show (thing)
       {  this.view.innerHTML
-            = thing.score > 0
+            = thing.score >= 0
             ? this.view.innerHTML + '<br>' + thing.score + '%'
             : thing
             ;
@@ -324,7 +324,7 @@
 
           view.show (hiragana [nextH] + " : " + katakana [nextK]);
           match && (played ? ++played : played = 1);
-          (played >= letters) && stop();
+          (played >= letters) && game.stop();
         }
 
       (game.play = playing)();
