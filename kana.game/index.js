@@ -1,33 +1,71 @@
 ;
 
 +
-{ todos:
-    [ "move +view and +game ions to their own scripts"
-    , "load alphabets via the +kana ion instead of generating them via +game.make()"
-    , "manage animation behavior from +view"
-    , "add a learn mode that only shows right answers"
-    , "add romaji"
-    , "enable creating hiragana, katakana, and romaji pairs"
-    , "swipe left decreases display speed, right increases it"
-    , "swipe up shows yes indicator above, down shows no indicator below"
-    , "speed up or down automatically based on user's guess success speed"
-    , "show maturing avatar representing proficiency"
-    , "combine letters as success plateaus; i.e.:"
-    , "   ひろこ : ヒロコ and はい : ハイ"
-    , "make a vocabulary game"
-    , "   enable word : image pairs"
-    , "make a statement confirmation game"
-    ]
-} //+todos
+{ re:
+    { id: "todos"
+    , of: "わかった"
+    , is: "ToDos for わかった, a Japanese language game"
+    , by: "Michael Lee, iskitz.net, @iskitz"
+    , at: "2016.01.23...03.10-08.00"
+    , in: "san-jose.california.usa.earth"
+    },
+
+  todos:
+    { ionify:
+        [ "get alphabets via +kana not +game.make()"
+        , "make +view, +game, + +kana.romaji own scripts"
+        , "manage css animation behavior from +view"
+        , "manage resources (css, audio, etc) from ions"
+        ]
+
+    , わかった:
+        [ "rename kana.game folder to wakatta"
+        , "swipe left slows display, right quickens it"
+        , "swipe up visualizes Yes, down visualizes No"
+        , "auto speed up or down per user's success speed"
+        , "enable pairing hiragana, katakana, + romaji"
+        , "add learn mode that only shows right answers"
+        , "add romaji typing practice"
+        , "add vocabulary, group by user's role(s) + interest(s)"
+        , "add image: word pairing"
+        , "add pronounciation audio: gendered voices"
+        , "add statement confirmation"
+        , "add image(s): statement pairing"
+        , "add character writing practice"
+
+        , { "proficiency progress":
+              [ "per character"
+              , 'per gojūon ("a,i,u,e,o") group'
+              , "per alphabet"
+              , "per character, group, + alphabet speed"
+              , "using maturing avatar"
+              ]
+          }
+
+        , { "proficiency coach":
+              [ { "as success plateaus":
+                   [ "increase speed"
+                   , "increase complexity"
+                   , "suggest other skills"
+                   , "interact with others"
+                   ]
+                }
+              , "combine letters; i.e. ひろこ : ヒロコ"
+              , "improve speed via auto-scroll and fade"
+              ]
+          }
+       ] //+.わかった
+    } //+.ionify +.わかった
+} //+わかった.todos
 
 +
 { re:
-    { id: "ions"
-    , of: "かなゲーム"
-    , is: "An ion communication hub within, かなゲーム, a Japanese kana alphabet game"
+    { id: "hub"
+    , of: "ionify"
+    , is: "An ion communication hub"
     , by: "Michael Lee, iskitz.net"
-    , at: "2016.01.23...03.08-08.00"
-    , in: "san-jose.california.usa.earth"
+    , at: "2007.09.15-04.00...2016.03.10-08.00"
+    , in: ["forest-hills.new-york.usa.earth", "san-jose.california.usa.earth"]
     },
 
   all:
@@ -110,19 +148,19 @@
       {  this.onIon.ions           = this
       ;  Object.prototype.valueOf  = this.onIon
       }
-} //+ions
+} //+ionify.hub
 
 +
 { re:
     { id: "view"
-    , of: "かなゲーム"
-    , is: "A web interface for, かなゲーム, a Japanese kana alphabet game"
+    , of: "わかった"
+    , is: "A web interface for, わかった, a Japanese language game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...03.09-08.00"
+    , at: "2016.01.15...03.10-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
-  title     : document.title = "かなゲーム",
+  title     : document.title = "わかった",
   view      : document.body,
   swipeSize : 10,
 
@@ -208,10 +246,10 @@
             ;  answer ? view.yes() : view.no()
             ;  view.show ({score: game.score (answer)})
             }
-        } //+view.guess.guessing()
+        } //+わかった.view.guess.guessing()
 
       return (view.guess = guessing);
-    }, //+view.guess()
+    }, //+わかった.view.guess()
 
   yes:
     function yes ()
@@ -236,15 +274,15 @@
             : thing
             ;
       }
-} //+view
+} //+わかった.view
 
 +
 { re:
     { id: "game"
-    , of: "かなゲーム"
-    , is: "かなゲーム, a japanese kana alphabet game"
+    , of: "わかった"
+    , is: "わかった, a japanese kana alphabet game"
     , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...03.09-08.00"
+    , at: "2016.01.15...03.10-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -258,7 +296,7 @@
     ["ア","ン"],
 
   go:
-    function かなゲーム ()
+    function わかった ()
       {  with (this)
            {  make ([hiragana, katakana])
            ;  this.view = ions.all.view
@@ -343,7 +381,7 @@
         }
 
       (game.play = playing)();
-    }, //+game.play()
+    }, //+わかった.game.play()
 
   score:
     function score (answer)
@@ -353,6 +391,6 @@
       ;  return this.skill
       }
 
-} //+game
+} //+わかった.game
 
 ;

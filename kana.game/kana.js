@@ -5,7 +5,7 @@
     { id: "kana"
     , is: "The Japanese Hiragana, Katakana, and Romaji character sets."
     , by: "Michael Lee, @iskitz, iskitz.net"
-    , at: "2016.01.15...29-08.00"
+    , at: "2016.01.15...03.10-08.00"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -31,6 +31,8 @@
         ,                                     'ぺ'
         ,                                     'ぽ'
         ],
+      sokuon:
+        [ 'っ'],
       yoon:
         [      'きゃ', 'しゃ', 'ちゃ', 'にゃ' , 'ひゃ' , 'みゃ'        , 'りゃ'
         ,      'きゅ', 'しゅ', 'ちゅ', 'にゅ' , 'ひゅ' , 'みゅ'        , 'りゅ'
@@ -66,6 +68,8 @@
         ,                                     'ペ'
         ,                                     'ポ'
         ],
+      sokuon:
+        [ 'ッ'],
       yoon:
         [      'キャ', 'シャ', 'チャ', 'ニャ' , 'ヒャ' , 'ミャ'       , 'リャ'
         ,      'キュ', 'シュ', 'チュ', 'ニュ' , 'ヒュ' , 'ミュ'       , 'リュ'
@@ -101,6 +105,8 @@
         ,                                     'pe'
         ,                                     'po'
         ],
+      sokuon:
+        [ 't'],
       yoon:
         [      'kya', 'sha' , 'cha', 'nya'  , 'hya' , 'mya'       , 'rya'
         ,      'kyu', 'shu' , 'chu', 'nyu'  , 'hyu' , 'myu'       , 'ryu'
