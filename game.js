@@ -2,11 +2,11 @@
 
 +
 { re:
-    { id: "game"
+    { id: "game@ions.iskitz.net.1.0"
     , of: "わかった"
     , is: "わかった, a japanese kana alphabet game"
-    , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...09.02-07.00"
+    , by: "mike.lee@iskitz"
+    , at: "2016.11.28-08...09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 

@@ -1,11 +1,11 @@
 ;
 +
 { re:
-    { id: "view"
+    { id: "view@ions.iskitz.net.1.0"
     , of: "わかった"
     , is: "A web interface for, わかった, a Japanese language game"
-    , by: "Michael Lee, iskitz.net, @iskitz"
-    , at: "2016.01.15...09.04-07.00"
+    , by: "mike.lee@iskitz"
+    , at: "2016.11.28-08...09.04-07"
     , in: "san-jose.california.usa.earth"
     },
 

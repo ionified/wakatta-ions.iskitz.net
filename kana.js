@@ -2,10 +2,10 @@
 
 +
 { re:
-    { id: "kana"
+    { id: "kana@ions.iskitz.net.1.0"
     , is: "The Japanese Hiragana, Katakana, and Romaji character sets."
-    , by: "Michael Lee, @iskitz, iskitz.net"
-    , at: "2016.01.15...08.12-08.00"
+    , by: "mike.lee@iskitz"
+    , at: "2016.11.28-08...08.12"
     , in: "san-jose.california.usa.earth"
     },
 
