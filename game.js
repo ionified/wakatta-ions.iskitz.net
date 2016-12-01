@@ -2,23 +2,22 @@
 
 +
 { re:
-    { id: "game@ions.iskitz.net.1.0"
-    , of: "わかった"
+    { id: "wakatta.game@ions.iskitz.net.0.1.1"
     , is: "わかった, a japanese kana alphabet game"
     , by: "mike.lee@iskitz"
-    , at: "2016.11.28-08...09.02-07"
+    , at: "2016.12.01-08...09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
   get:
-    ["kana.js", "view.js"],
+    ["kana", "view"],
 
   on:
     ["kana", "show"],  //can:"show"
 
   kana:
     function onKana (kana)
-      {  var game = onKana.game
+      {  var game = onKana.this
            , alpha
            , next
            , name
@@ -42,7 +41,7 @@
 
   show:
     function onShow (view)
-      {  var game  = onShow.game
+      {  var game  = onShow.this
       ;  game.show = view.show      //td.ionify: set automatically
       ;  +{game:game} + game.start  //td.view  : on:{id:"game"}
       },
@@ -51,7 +50,7 @@
 
   start:
     function start ()
-      { with (start.game)
+      { with (start.this)
           {  play()
           ;  stop.id = setInterval (play, speed)
           }
@@ -81,7 +80,7 @@
       }; //re.game.play()
 
 
-      var game      = play.game
+      var game      = play.this
         , show      = game.show
         , stop      = game.stop
         , hiragana  = game.romaji.gojuon
@@ -111,7 +110,7 @@
 
   score:
     function score (answer)
-      {  var game = score.game
+      {  var game = score.this
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
       ;  game.skill = Math.round ((score.correct / this.answers) * 100)
