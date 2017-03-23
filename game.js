@@ -1,11 +1,11 @@
 ;
 
-+
+~
 { re:
     { id: "wakatta.game@ions.iskitz.net.0.1.1"
     , is: "わかった, a japanese kana alphabet game"
     , by: "mike.lee@iskitz"
-    , at: "2016.12.01-08...09.02-07"
+    , at: "2017.03.23-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -15,18 +15,19 @@
   on:
     ["kana", "show"],  //can:"show"
 
+
   kana:
     function onKana (kana)
-      {  var game = onKana.this
-           , alpha
-           , next
-           , name
-           ;
+      { var game = onKana.this
+          , alpha
+          , next
+          , name
+          ;
 
-         for (var set in kana)
-           {  if (set == "re" || set == "kana") continue
-           ;  next  = kana [set]
-           ;  alpha = []
+        for (var set in kana)
+          {   if (set == "re" || set == "kana") continue
+          ;   next  = kana [set]
+          ;   alpha = []
 
               for (var subset in next)
                 {  subset = next [name = subset]
@@ -36,15 +37,33 @@
                 }
 
               game [set] = alpha
-           }
+          }
+
+        ~{game:game} + /todo: +view.on: {id:"game"} +game.kana: +this /
       },
 
+
   show:
-    function onShow (view)
-      {  var game  = onShow.this
-      ;  game.show = view.show      //td.ionify: set automatically
-      ;  +{game:game} + game.start  //td.view  : on:{id:"game"}
+    function onShow (viewORdata)
+      {   if (!viewORdata) return
+
+          var game  = onShow    .ion
+            , show  = viewORdata.show
+            ;
+
+          switch (true)
+            { case "function" == typeof viewORdata.show
+                :   game.show = viewORdata.show             ;~/todo: ionify: get sets automatically      /
+                ~  {no:"show", for:game}                     +/note: ignore future "show" notifications  /
+                ~   game.stop + game.start
+                ;   break
+
+              default
+                :  +{log:viewORdata}
+                ;   break
+            }
       },
+
 
   speed: 5000||"ms",
 
@@ -56,10 +75,12 @@
           }
       },
 
+
   stop:
     function stop ()
       {  clearInterval (stop.id);
       },
+
 
   answer  : false,
   answers : 0,
@@ -105,6 +126,7 @@
 
       (game.play = playing)();
     }, //+わかった.game.play()
+
 
   skill: 0,
 

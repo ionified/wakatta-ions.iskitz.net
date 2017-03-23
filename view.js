@@ -1,10 +1,11 @@
 ;
-+
+
+~
 { re:
     { id: "wakatta.view@ions.iskitz.net.0.1.1"
     , is: "A web interface for, わかった, a Japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2016.12.01-08...09.04-07"
+    , at: "2017.03.23-07...2016.09.04-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -16,12 +17,15 @@
                    get: ["start", "stop", "answer", "score"]
                       = view.start,stop,answer,score()
                  */
+
+
   game:
-    function hasGame (ion)
-      {  var view  = hasGame.this
+    function onGame (ion)
+      {  var view  = onGame.this
       ;  view.game = ion.game
-      ;  +view.sense
+      ;  view.game.stop + view.sense + view.game.start
       },
+
 
   sense:
     function sense ()
@@ -39,6 +43,7 @@
       dom.addEventListener ("mouseout"   , move, false);
       dom.addEventListener ("mouseup"    , move, false);
     },
+
 
   move:
     function move () {
@@ -101,6 +106,7 @@
       return (view.move = moving);
     }, //+わかった.view.move()
 
+
   guess:
     function guess (move)
       { var view      = guess.this
@@ -126,20 +132,24 @@
         return guessed;
       },
 
+
   yes:
     function yes ()
       {  yes.this.dom.className = "yes"
       },
+
 
   no:
     function no ()
       {  no.this.dom.className = "no"
       },
 
+
   reset:
     function reset ()
       {  reset.this.dom.className = ""
       },
+
 
   show:
     function show (thing)
@@ -150,4 +160,5 @@
             ;
       }
 } //+わかった.view
+
 ;
