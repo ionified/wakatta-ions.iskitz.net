@@ -5,12 +5,12 @@
     { id: "wakatta.game@ions.iskitz.net.0.1.1"
     , is: "わかった, a japanese kana alphabet game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.23-07...2016.09.02-07"
+    , at: "2017.03.24-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
   get:
-    ["kana", "view"],
+    ["view", "kana"],
 
   on:
     ["kana", "show"],  //can:"show"
@@ -39,7 +39,8 @@
               game [set] = alpha
           }
 
-        ~{game:game} + /todo: +view.on: {id:"game"} +game.kana: +this /
+        game.hasKana = true;
+        ~{game:game}          + /todo: +view.on: {id:"game"} +game.kana: +this /
       },
 
 
@@ -52,9 +53,9 @@
             ;
 
           switch (true)
-            { case "function" == typeof viewORdata.show
-                :   game.show = viewORdata.show             ;~/todo: ionify: get sets automatically      /
-                ~  {no:"show", for:game}                     +/note: ignore future "show" notifications  /
+            { case "function" == typeof show
+                :   game.show = show             ;~/ todo: +get will automatically set loaded things /
+                ~   {no:game, on:"show"}         ;~/ note: +game ignore future "show" notifications  /
                 ~   game.stop + game.start
                 ;   break
 
@@ -69,7 +70,10 @@
 
   start:
     function start ()
-      { with (start.this)
+      { var game = start.this
+      ; if (!game.hasKana) return
+
+      ; with (game)
           {  play()
           ;  stop.id = setInterval (play, speed)
           }
