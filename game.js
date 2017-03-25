@@ -5,7 +5,7 @@
     { id: "wakatta.game@ions.iskitz.net.0.1.1"
     , is: "わかった, a japanese kana alphabet game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.24-07...2016.09.02-07"
+    , at: "2017.03.25-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -13,7 +13,7 @@
     ["view", "kana"],
 
   on:
-    ["kana", "show"],  //can:"show"
+    ["show", "kana"],  //can:"show"
 
 
   kana:
@@ -121,11 +121,10 @@
             , nextK       = match ? nextH : (Math.random() * letters) | 0
             ; game.answer = nextH == nextK
             ; game.answers++
-            ;
 
-          show (hiragana [nextH] + " : " + katakana [nextK]);
-          match && (played ? ++played : played = 1);
-          (played >= letters) && stop();
+        ; match && (played ? ++played : played = 1)
+        ; (played >= letters) && stop()
+        ; show (hiragana [nextH] + " : " + katakana [nextK])
         }
 
       (game.play = playing)();
@@ -139,7 +138,7 @@
       {  var game = score.this
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
-      ;  game.skill = Math.round ((score.correct / this.answers) * 100)
+      ;  game.skill = Math.round ((score.correct / game.answers) * 100)
       ;  return game.skill
       }
 
