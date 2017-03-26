@@ -1,51 +1,63 @@
 ;
-+
+
+~
 { re:
-    { id: "view@ions.iskitz.net.1.0"
-    , of: "わかった"
-    , is: "A web interface for, わかった, a Japanese language game"
+    { id: "wakatta.view.0.1@ions.iskitz.net"
+    , is: "A web interface for, わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2016.11.28-08...09.04-07"
+    , at: "2017.03.26-07...2016.09.04-07"
     , in: "san-jose.california.usa.earth"
     },
 
-  dom  : document.body,
-  title: document.title = "わかった",
 
-  on  : "game", /* can: [start,stop,score]
+  on: "game",   /* can: [start,stop,score]
                       : use as own, ignore owner
                    get: ["start", "stop", "answer", "score"]
                       = view.start,stop,answer,score()
                  */
+
+
   game:
-    function hasGame (ion)
-      {  var view  = hasGame.view
-      ;  view.game = ion.game
-      ;  +view.sense
+    function onGame (ion)
+      { var view  = onGame.this
+          , game  = view.game  = ion.game
+      ; game.stop + view.sense + game.start
       },
+
+
+  dom  : this && this.document &&  this.document.body,
+  title: this && this.document && (this.document.title = "わかった"),
+
+  errors:
+    { noDOM: "Wakatta uses the DOM:'Document Object Module' for display + interaction but found none."
+    },
+
 
   sense:
     function sense ()
-    { var view  = sense.view
-        , move  = view.move()
-        , dom   = view.dom
-        ;
+      { var view  = sense.this
+          , move  = view.move()
+          , dom   = view.dom
+          ;
 
-      dom.addEventListener ("touchstart" , move, false);
-      dom.addEventListener ("touchmove"  , move, false);
-      dom.addEventListener ("touchend"   , move, false);
+      ! dom && +{error: view.errors.noDOM}
 
-      dom.addEventListener ("mousedown"  , move, false);
-      dom.addEventListener ("mousemove"  , move, false);
-      dom.addEventListener ("mouseout"   , move, false);
-      dom.addEventListener ("mouseup"    , move, false);
-    },
+      ; dom.addEventListener ("touchstart" , move, false)
+      ; dom.addEventListener ("touchmove"  , move, false)
+      ; dom.addEventListener ("touchend"   , move, false)
+
+      ; dom.addEventListener ("mousedown"  , move, false)
+      ; dom.addEventListener ("mousemove"  , move, false)
+      ; dom.addEventListener ("mouseout"   , move, false)
+      ; dom.addEventListener ("mouseup"    , move, false)
+      },
+
 
   move:
     function move () {
-      +
+      ~
       { re:
-          { id: "view.move",
+          { id: "wakatta.view.move",
             it:
               [ "Determines Yes, No, or Skip choice based on touch and movement input"
               , "Yes is any touch + upward movement greater than or equal to +view.swipeSize pixels"
@@ -56,9 +68,9 @@
               , "Displays score via +view.show()"
               ]
           }
-      }; //re.view.move()
+      };
 
-      var view  = move.view
+      var view  = move.this
         , game  = view.game
         , guess = null
         , from  = {y:null}
@@ -102,9 +114,10 @@
       return (view.move = moving);
     }, //+わかった.view.move()
 
+
   guess:
     function guess (move)
-      { var view      = guess.view
+      { var view      = guess.this
           , game      = view.game
           , answer    = false
           , guessed   = null
@@ -127,28 +140,34 @@
         return guessed;
       },
 
+
   yes:
     function yes ()
-      {  yes.view.dom.className = "yes"
+      {  yes.this.dom.className = "yes"
       },
+
 
   no:
     function no ()
-      {  no.view.dom.className = "no"
+      {  no.this.dom.className = "no"
       },
+
 
   reset:
     function reset ()
-      {  reset.view.dom.className = ""
+      {  reset.this.dom.className = ""
       },
+
 
   show:
     function show (thing)
-      {  show.view.dom.innerHTML
+      {  show.this.dom.innerHTML
             = thing.score >= 0
-            ? show.view.dom.innerHTML + '<br>' + thing.score + '%'
+            ? show.this.dom.innerHTML + '<br>' + thing.score + '%'
             : thing
             ;
       }
-} //+わかった.view
+
+} //+wakatta.view
+
 ;

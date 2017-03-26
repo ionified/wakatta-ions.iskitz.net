@@ -1,33 +1,33 @@
 ;
 
-+
+~
 { re:
-    { id: "game@ions.iskitz.net.1.0"
-    , of: "わかった"
-    , is: "わかった, a japanese kana alphabet game"
+    { id: "wakatta.game.0.1@ions.iskitz.net"
+    , is: "わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2016.11.28-08...09.02-07"
+    , at: "2017.03.26-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
   get:
-    ["kana.js", "view.js"],
+    ["view", "kana"],
 
   on:
-    ["kana", "show"],  //can:"show"
+    ["show", "kana"],  //can:"show"
+
 
   kana:
     function onKana (kana)
-      {  var game = onKana.game
-           , alpha
-           , next
-           , name
-           ;
+      { var game = onKana.this
+          , alpha
+          , next
+          , name
+          ;
 
-         for (var set in kana)
-           {  if (set == "re" || set == "kana") continue
-           ;  next  = kana [set]
-           ;  alpha = []
+        for (var set in kana)
+          {   if (set == "re" || set == "kana") continue
+          ;   next  = kana [set]
+          ;   alpha = []
 
               for (var subset in next)
                 {  subset = next [name = subset]
@@ -37,30 +37,54 @@
                 }
 
               game [set] = alpha
-           }
+          }
+
+        game.hasKana = true;
+        ~{game:game}                              ;~/ todo: +view.on: {id:"game"}; +game.onKana? +this /
       },
 
+
   show:
-    function onShow (view)
-      {  var game  = onShow.game
-      ;  game.show = view.show      //td.ionify: set automatically
-      ;  +{game:game} + game.start  //td.view  : on:{id:"game"}
+    function onShow (viewORdata)
+      {   if (!viewORdata) return
+
+          var game  = onShow    .ion
+            , show  = viewORdata.show
+            ;
+
+          switch (true)
+            { case "function" == typeof show
+                :   game.show = show             ;~/ todo: +get would auto-add view's .show() to +game  /
+                ~   {no:game, on:"show"}         ;~/ note: +game ignoring future "show" notifications   /
+                ~   game.stop + game.start
+                ;   break
+
+              default
+                :  +{log:viewORdata}
+                ;   break
+            }
       },
+
 
   speed: 5000||"ms",
 
   start:
     function start ()
-      { with (start.game)
+      { var game = start.this
+      ; if (!game.hasKana) return
+
+      ; with (game)
           {  play()
           ;  stop.id = setInterval (play, speed)
           }
       },
 
+
   stop:
     function stop ()
       {  clearInterval (stop.id);
       },
+
 
   answer  : false,
   answers : 0,
@@ -68,9 +92,9 @@
 
   play:
     function play() {
-      +
+      ~
       { re:
-          { id: "game.play",
+          { id: "wakatta.game.play",
             it:
               [ "Decides which pairs of letters to show using randomness"
               , "Decides which pairs should match using the +game.ease randomness threshold"
@@ -78,10 +102,10 @@
               , "Stops the game after showing as many matches as there are letters"
               ]
           }
-      }; //re.game.play()
+      };
 
 
-      var game      = play.game
+      var game      = play.this
         , show      = game.show
         , stop      = game.stop
         , hiragana  = game.romaji.gojuon
@@ -97,27 +121,27 @@
             , nextK       = match ? nextH : (Math.random() * letters) | 0
             ; game.answer = nextH == nextK
             ; game.answers++
-            ;
 
-          show (hiragana [nextH] + " : " + katakana [nextK]);
-          match && (played ? ++played : played = 1);
-          (played >= letters) && stop();
+        ; match && (played ? ++played : played = 1)
+        ; (played >= letters) && stop()
+        ; show (hiragana [nextH] + " : " + katakana [nextK])
         }
 
       (game.play = playing)();
-    }, //+わかった.game.play()
+    }, //+wakatta.game.play()
+
 
   skill: 0,
 
   score:
     function score (answer)
-      {  var game = score.game
+      {  var game = score.this
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
-      ;  game.skill = Math.round ((score.correct / this.answers) * 100)
+      ;  game.skill = Math.round ((score.correct / game.answers) * 100)
       ;  return game.skill
       }
 
-} //+わかった.game
+} //+wakatta.game
 
 ;

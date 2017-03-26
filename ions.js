@@ -1,17 +1,15 @@
 ;
 
-+
+~
 { re:
-    { id: "ions@wakatta.iskitz.net"
-    , by: "Michael Lee"
-    , at: "2016.08.02...19-07"
-    , in:
-        [ "forest-hills.new-york.usa.earth"
-        , "san-jose.california.usa.earth"
-        ]
-    },
+    { id: "wakatta.0.1@ions.iskitz.net"
+    , by: "mike.lee@iskitz"
+    , at: "2017.03.26-07...2016.08.19-07"
+    , in: "san-jose.california.usa.earth"
+    }
 
-  get: ["game.js"]
+, debug:  !true
+, get  : ["game"]
 }
 
 ;
