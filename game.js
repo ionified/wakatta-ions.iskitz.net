@@ -2,10 +2,10 @@
 
 ~
 { re:
-    { id: "wakatta.game@ions.iskitz.net.0.1.1"
-    , is: "わかった, a japanese kana alphabet game"
+    { id: "wakatta.game.0.1@ions.iskitz.net"
+    , is: "わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.24-07...2016.09.02-07"
+    , at: "2017.03.26-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -40,7 +40,7 @@
           }
 
         game.hasKana = true;
-        ~{game:game}          + /todo: +view.on: {id:"game"} +game.kana: +this /
+        ~{game:game}                              ;~/ todo: +view.on: {id:"game"}; +game.onKana? +this /
       },
 
 
@@ -54,8 +54,8 @@
 
           switch (true)
             { case "function" == typeof show
-                :   game.show = show             ;~/ todo: +get will automatically set loaded things /
-                ~   {no:game, on:"show"}         ;~/ note: +game ignore future "show" notifications  /
+                :   game.show = show             ;~/ todo: +get would auto-add view's .show() to +game  /
+                ~   {no:game, on:"show"}         ;~/ note: +game ignoring future "show" notifications   /
                 ~   game.stop + game.start
                 ;   break
 
@@ -92,9 +92,9 @@
 
   play:
     function play() {
-      +
+      ~
       { re:
-          { id: "game.play",
+          { id: "wakatta.game.play",
             it:
               [ "Decides which pairs of letters to show using randomness"
               , "Decides which pairs should match using the +game.ease randomness threshold"
@@ -102,7 +102,7 @@
               , "Stops the game after showing as many matches as there are letters"
               ]
           }
-      }; //re.game.play()
+      };
 
 
       var game      = play.this
@@ -129,7 +129,7 @@
         }
 
       (game.play = playing)();
-    }, //+わかった.game.play()
+    }, //+wakatta.game.play()
 
 
   skill: 0,
@@ -143,6 +143,6 @@
       ;  return game.skill
       }
 
-} //+わかった.game
+} //+wakatta.game
 
 ;
