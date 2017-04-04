@@ -5,7 +5,7 @@
     { id: "wakatta.game.0.1@ions.iskitz.net"
     , is: "わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.26-07...2016.09.02-07"
+    , at: "2017.03.28-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -39,7 +39,7 @@
               game [set] = alpha
           }
 
-        game.hasKana = true;
+        game.kana.has = +Date.now || (new Date).getTime()
         ~{game:game}                              ;~/ todo: +view.on: {id:"game"}; +game.onKana? +this /
       },
 
@@ -54,8 +54,8 @@
 
           switch (true)
             { case "function" == typeof show
-                :   game.show = show             ;~/ todo: +get would auto-add view's .show() to +game  /
-                ~   {no:game, on:"show"}         ;~/ note: +game ignoring future "show" notifications   /
+                :   game.show = show             ;~/ todo: +get auto-adds view's .show() to +game   /
+                ~   {on:"show", no:onShow}       ;~/ note: +game ignores future "show" notifications /
                 ~   game.stop + game.start
                 ;   break
 
@@ -71,7 +71,7 @@
   start:
     function start ()
       { var game = start.this
-      ; if (!game.hasKana) return
+      ; if (!game.kana.has) return
 
       ; with (game)
           {  play()
