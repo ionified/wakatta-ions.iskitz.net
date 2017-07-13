@@ -5,7 +5,7 @@
     { id: "wakatta.view.0.1@ions.iskitz.net"
     , is: "A web interface for, わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.26-07...2016.09.04-07"
+    , at: "2017.07.13-07...2016.09.04-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -19,7 +19,7 @@
 
   game:
     function onGame (ion)
-      { var view  = onGame.this
+      { var view  = onGame.ion
           , game  = view.game  = ion.game
       ; game.stop + view.sense + game.start
       },
@@ -35,7 +35,7 @@
 
   sense:
     function sense ()
-      { var view  = sense.this
+      { var view  = sense.ion
           , move  = view.move()
           , dom   = view.dom
           ;
@@ -70,7 +70,7 @@
           }
       };
 
-      var view  = move.this
+      var view  = move.ion
         , game  = view.game
         , guess = null
         , from  = {y:null}
@@ -117,7 +117,7 @@
 
   guess:
     function guess (move)
-      { var view      = guess.this
+      { var view      = guess.ion
           , game      = view.game
           , answer    = false
           , guessed   = null
@@ -143,27 +143,27 @@
 
   yes:
     function yes ()
-      {  yes.this.dom.className = "yes"
+      {  yes.ion.dom.className = "yes"
       },
 
 
   no:
     function no ()
-      {  no.this.dom.className = "no"
+      {  no.ion.dom.className = "no"
       },
 
 
   reset:
     function reset ()
-      {  reset.this.dom.className = ""
+      {  reset.ion.dom.className = ""
       },
 
 
   show:
     function show (thing)
-      {  show.this.dom.innerHTML
+      {  show.ion.dom.innerHTML
             = thing.score >= 0
-            ? show.this.dom.innerHTML + '<br>' + thing.score + '%'
+            ? show.ion.dom.innerHTML + '<br>' + thing.score + '%'
             : thing
             ;
       }
