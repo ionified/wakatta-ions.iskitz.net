@@ -5,7 +5,7 @@
     { id: "wakatta.game.0.1@ions.iskitz.net"
     , is: "わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2017.03.26-07...2016.09.02-07"
+    , at: "2017.07.13-07...2016.09.02-07"
     , in: "san-jose.california.usa.earth"
     },
 
@@ -18,7 +18,7 @@
 
   kana:
     function onKana (kana)
-      { var game = onKana.this
+      { var game = onKana.ion
           , alpha
           , next
           , name
@@ -70,7 +70,7 @@
 
   start:
     function start ()
-      { var game = start.this
+      { var game = start.ion
       ; if (!game.hasKana) return
 
       ; with (game)
@@ -105,7 +105,7 @@
       };
 
 
-      var game      = play.this
+      var game      = play.ion
         , show      = game.show
         , stop      = game.stop
         , hiragana  = game.romaji.gojuon
@@ -135,7 +135,7 @@
 
   score:
     function score (answer)
-      {  var game = score.this
+      {  var game = score.ion
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
       ;  game.skill = Math.round ((score.correct / game.answers) * 100)
