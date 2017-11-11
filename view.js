@@ -1,44 +1,28 @@
 ;
-
 ~
 { re:
     { id: "wakatta.view.0.1@ions.iskitz.net"
     , is: "A web interface for, わかった, a japanese language game"
     , by: "mike.lee@iskitz"
-    , at: "2017.07.13-07...2016.09.04-07"
+    , at: "2017.11.11-08...2016.09.04-07"
     , in: "san-jose.california.usa.earth"
-    },
+    }
 
-
-  on: "game",   /* can: [start,stop,score]
-                      : use as own, ignore owner
-                   get: ["start", "stop", "answer", "score"]
-                      = view.start,stop,answer,score()
-                 */
-
-
-  game:
-    function onGame (ion)
-      { var view  = onGame.ion
-          , game  = view.game  = ion.game
-      ; game.stop + view.sense + game.start
-      },
-
-
-  dom  : this && this.document &&  this.document.body,
-  title: this && this.document && (this.document.title = "わかった"),
+, do    : "sense"
+, dom   : this && this.document &&  this.document.body
+, title : this && this.document && (this.document.title = "わかった")
+,
 
   errors:
     { noDOM: "Wakatta uses the DOM:'Document Object Module' for display + interaction but found none."
-    },
-
+    }
+    ,
 
   sense:
     function sense ()
       { var view  = sense.ion
           , move  = view.move()
           , dom   = view.dom
-          ;
 
       ! dom && +{error: view.errors.noDOM}
 
@@ -50,8 +34,8 @@
       ; dom.addEventListener ("mousemove"  , move, false)
       ; dom.addEventListener ("mouseout"   , move, false)
       ; dom.addEventListener ("mouseup"    , move, false)
-      },
-
+      }
+      ,
 
   move:
     function move () {
@@ -68,7 +52,7 @@
               , "Displays score via +view.show()"
               ]
           }
-      };
+      }
 
       var view  = move.ion
         , game  = view.game
@@ -76,16 +60,15 @@
         , from  = {y:null}
         , to    = {y:null}
         , moved
-        ;
 
       function moving (event)
-        { event.preventDefault();
+        { event.preventDefault()
 
           switch (event.type)
             { case "touchstart":
               case "mousedown"
                :  moved = from
-               ;  break;
+               ;  break
 
               case "touchmove":
               case "mousemove"
@@ -97,23 +80,21 @@
               case "mouseout":
               case "mouseup"
                :  guess = from.x = from.y = to.x = to.y = null
-               ;  game.stop + view.reset + game.start
+               ;  game.stop & view.reset & game.start
                ;  return
-            }//switch
+            }
 
-          moved.x = event.pageX;
-          moved.y = event.pageY;
+        ; moved.x = event.pageX
+        ; moved.y = event.pageY
+        ; if (to.y === null) return
+        ; moved.x = from.x - to.x
+        ; moved.y = from.y - to.y
+        ; guess   = view.guess (moved)
+        }
 
-          if (to.y === null) return;
-
-          moved.x = from.x - to.x;
-          moved.y = from.y - to.y;
-          guess   = view.guess (moved);
-        } //+わかった.view.move.moving()
-
-      return (view.move = moving);
-    }, //+わかった.view.move()
-
+      return (view.move = moving)
+    }
+    ,
 
   guess:
     function guess (move)
@@ -122,7 +103,6 @@
           , answer    = false
           , guessed   = null
           , swipeSize = 10
-          ;
 
         if (Math.abs (move.y) >= swipeSize)
           {  game.stop()
@@ -137,37 +117,36 @@
           ;  view.dom.style.animationDuration = (game.speed / 2000) + 's'
           }
 
-        return guessed;
-      },
-
+        return guessed
+      }
+      ,
 
   yes:
     function yes ()
       {  yes.ion.dom.className = "yes"
-      },
-
-
+      }
+      ,
   no:
     function no ()
       {  no.ion.dom.className = "no"
-      },
-
-
+      }
+      ,
   reset:
     function reset ()
-      {  reset.ion.dom.className = ""
-      },
-
+      {  reset.ion.dom.className = "fade"
+      }
+      ,
 
   show:
     function show (thing)
-      {  show.ion.dom.innerHTML
+      { var dom = show.ion.dom
+
+        dom.innerHTML
             = thing.score >= 0
-            ? show.ion.dom.innerHTML + '<br>' + thing.score + '%'
+            ? dom.innerHTML + '<br>' + thing.score + '%'
             : thing
-            ;
+
+      ! show.ing && (show.ing = true) && show.ion.reset()
       }
-
 } //+wakatta.view
-
 ;

@@ -9,12 +9,15 @@ html, body
   }
 
 body
-  { animation     : 2.5s infinite alternate fade
+  { animation-name: unset
   ; color         : #777
   ; font-family   : "Hiragino Mincho ProN"
   ; font-size     : 61px
   ; margin-top    : 25%
   ; text-align    : center
+  }
+body.fade
+  { animation     : 2.5s infinite alternate fade
   }
 body.yes
   { animation-name: none
