@@ -80,7 +80,7 @@
               case "mouseout":
               case "mouseup"
                :  guess = from.x = from.y = to.x = to.y = null
-               ;  game.stop & view.reset & game.start
+               ;  view.game.stop & view.reset & view.game.start
                ;  return
             }
 
