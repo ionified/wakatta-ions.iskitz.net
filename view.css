@@ -1,19 +1,23 @@
 @charset "UTF-8";
 
 html, body
-  { height   : 100%
+  { border   : 0px solid #f00 /*debug*/
+  ; height   : 100%
   ; width    : 100%
   ; margin   : 0
   ; padding  : 0
   ; overflow : hidden
+  ; overscroll-behavior: none
   }
 
 body
   { animation-name: unset
+  ; border        : 0px solid #0f0 /*debug*/
   ; color         : #777
   ; font-family   : "Hiragino Mincho ProN"
-  ; font-size     : 61px
-  ; margin-top    : 25%
+  ; font-size     : 5em
+  ; height        : 20%
+  ; padding       : 47% 0
   ; text-align    : center
   }
 body.fade
