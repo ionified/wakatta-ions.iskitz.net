@@ -1,5 +1,13 @@
 @charset "UTF-8";
 
+/*
+id: wakatta.view.css@ions.iskitz.net
+by: mike.lee@iskitz
+at: 2018.10.13+09...2017.11.11-07
+im: going to try absolute positioning to ensure full page swipe detection.
+*/
+
+
 html, body
   { border   : 0px solid #f00 /*debug*/
   ; height   : 100%
