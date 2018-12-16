@@ -16,13 +16,14 @@
   <title>わかった</title>
   </head>
   <body>
-     <script external src="https://cdn.jsdelivr.net/gh/ionify/ionify@public/web.js"
-             temporal-src="https://cdn.jsdelivr.net/gh/ionify/ionify@ions/web.js"
-             glitched-src="https://ionify.glitch.me/web.js"
-             internal-src="http://localhost:port/ionify/web.js"
-                  onerror="console.log (`ionify not loaded from ${this.src}`)"
-                     type="text/javascript"
-                     async>
+    <script external src="https://cdn.jsdelivr.net/gh/ionify/ionify@public/web.js"
+            temporal-src="https://cdn.jsdelivr.net/gh/ionify/ionify@ions/web.js"
+            glitched-src="https://ionify.glitch.me/web.js"
+            onserver-src="http://localhost:port/ionify/web.js"
+            infolder-src="../ionify/web.js"
+                 onerror="console.log (`ionify not loaded from ${this.src}`)"
+                    type="text/javascript"
+                    async>
      </script>
   </body>
 </html>
