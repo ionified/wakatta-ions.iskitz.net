@@ -1,14 +1,16 @@
 ;
 ~
 { re:
-    { id: "wakatta.view.0.1@ions.iskitz.net"
+    { id: 'wakatta.view@ions.iskitz.net'
     , is: "A web interface for, わかった, a japanese language game"
-    , by: "mike.lee@iskitz"
-    , at: "2017.11.11-08...2016.09.04-07"
-    , in: "san-jose.california.usa.earth"
+    , by: 'mike.lee@iskitz'
+    , on: '2016.09.04-07'
+    , to: '2019.03.30-07'
+    , in: 'san-jose.california.usa.earth'
+    , at: +2.1
     }
 
-, do    : "sense"
+, do    : 'sense'
 , dom   : this && this.document &&  this.document.body
 , title : this && this.document && (this.document.title = "わかった")
 ,
@@ -20,7 +22,7 @@
 
   sense:
     function sense ()
-      { var view  = sense.ion
+      { var view  = sense.home
           , move  = view.move()
           , dom   = view.dom
 
@@ -54,7 +56,7 @@
           }
       }
 
-      var view  = move.ion
+      var view  = move.home
         , game  = view.game
         , guess = null
         , from  = {y:null}
@@ -98,7 +100,7 @@
 
   guess:
     function guess (move)
-      { var view      = guess.ion
+      { var view      = guess.home
           , game      = view.game
           , answer    = false
           , guessed   = null
@@ -123,30 +125,30 @@
 
   yes:
     function yes ()
-      {  yes.ion.dom.className = "yes"
+      {  yes.home.dom.className = "yes"
       }
       ,
   no:
     function no ()
-      {  no.ion.dom.className = "no"
+      {  no.home.dom.className = "no"
       }
       ,
   reset:
     function reset ()
-      {  reset.ion.dom.className = "fade"
+      {  reset.home.dom.className = "fade"
       }
       ,
 
   show:
     function show (thing)
-      { var dom = show.ion.dom
+      { var dom = show.home.dom
 
         dom.innerHTML
             = thing.score >= 0
             ? dom.innerHTML + '<br>' + thing.score + '%'
             : thing
 
-      ! show.ing && (show.ing = true) && show.ion.reset()
+      ! show.ing && (show.ing = true) && show.home.reset()
       }
-} //+wakatta.view
+}
 ;

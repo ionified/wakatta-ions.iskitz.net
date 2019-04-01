@@ -1,29 +1,32 @@
 ;
 ~
 { re:
-    { id: "wakatta.game.0.1@ions.iskitz.net"
-    , is: "わかった, a japanese language game"
-    , by: "mike.lee@iskitz"
-    , at: "2017.11.11-08...2016.09.02-07"
-    , in: "san-jose.california.usa.earth"
+    { id: "wakatta.game@ions.iskitz.net"
+    , by: 'mike.lee'
+    , on: -7.20160902
+    , to: -7.20190330
+    , at: 'ions.iskitz.net'
+    , in: 'san-jose.california.usa.earth'
+    , is: +2.1
+    , it: "implements わかった, a japanese language game"
     }
 
+, on:
+    ['kana', 'show'] //can:"show"
 
-, get: ["kana", "view"]
-, on : ["kana", "show"]  //can:"show"
-,
+, get
+:   ['kana', 'view']
 
-  ready:
-    function ready (state)
-      { var     game  = ready.ion
+, ready
+:   function ready (state)
+      { var     game  = ready.home
       ; ready [state] = true
       ; ready.kana && ready.view && game.stop & game.start
       }
-      ,
 
-  kana:
-    function onKana (kana)
-      { var game = onKana.ion
+, kana
+:   function onKana (kana)
+      { var game = onKana.home
           , alpha
           , next
           , name
@@ -45,11 +48,10 @@
           }
         game.ready ("kana")
       }
-      ,
 
-  show:
-    function onShow (view)
-      {   var game = onShow.ion
+, show
+:   function onShow (view)
+      {   var game = onShow.home
             , show = view.show
             , type = typeof show
 
@@ -59,33 +61,30 @@
       ;   view.game = game
       ;   game.ready ("view")
       }
-      ,
 
-  speed: 5000||"ms"
-      ,
-  start:
-    function start ()
-      { var game = start.ion
+, speed: 5000||"ms"
+
+, start
+:   function start ()
+      { var game = start.home
 
         with (game)
           {  play()
           ;  stop.id = setInterval (play, speed)
           }
       }
-      ,
 
-  stop:
-    function stop ()
+, stop
+:   function stop ()
       {  clearInterval (stop.id)
       }
 
 , answer  : false
 , answers : 0
 , ease    : 5 //1=10%,..., 5=50%,..., 10=100%
-,
 
-  play:
-    function play()
+, play
+:   function play()
       { ~
         { re:
             { id: "wakatta.game.play@ions.iskitz.net"
@@ -98,7 +97,7 @@
             }
         }
 
-        var game      = play.ion
+        var game      = play.home
           , show      = game.show
           , stop      = game.stop
           , hiragana  = game.romaji.gojuon
@@ -120,17 +119,16 @@
 
         (game.play = playing)()
       }
-      ,
       
-  skill: 0
-      ,
-  score:
-    function score (answer)
-      {  var game = score.ion
+, skill: 0
+
+, score
+:   function score (answer)
+      {  var game = score.home
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
       ;  game.skill = Math.round ((score.correct / game.answers) * 100)
       ;  return game.skill
       }
-} //+wakatta.game
+}
 ;

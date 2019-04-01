@@ -1,13 +1,14 @@
 ;
 ~
 { re:
-    { id: "wakatta.0.1@ions.iskitz.net"
-    , by: "mike.lee@iskitz"
-    , at: "2017.11.11-08...2016.08.19-07"
-    , in: "san-jose.california.usa.earth"
+    { id: 'wakatta@ions.iskitz.net'
+    , by: 'mike.lee'
+    , at: 'ions.iskitz.net'
+    , on: -7.20160819
+    , to: -8.20190121
+    , in: 'san-jose.california.usa.earth'
+    , is: -0.1
     }
-
-, debug:  !true
-, get  : ["game"]
+, get:'game'
 }
 ;
