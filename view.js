@@ -5,9 +5,9 @@
     , is: "A web interface for, わかった, a japanese language game"
     , by: 'mike.lee@iskitz'
     , on: '2016.09.04-07'
-    , to: '2019.03.30-07'
+    , to: '2019.04.13-07'
     , in: 'san-jose.california.usa.earth'
-    , at: +2.1
+    , at: +2.2
     }
 
 , do    : 'sense'
@@ -22,7 +22,7 @@
 
   sense:
     function sense ()
-      { var view  = sense.home
+      { var view  = sense.with
           , move  = view.move()
           , dom   = view.dom
 
@@ -56,7 +56,7 @@
           }
       }
 
-      var view  = move.home
+      var view  = move.with
         , game  = view.game
         , guess = null
         , from  = {y:null}
@@ -100,7 +100,7 @@
 
   guess:
     function guess (move)
-      { var view      = guess.home
+      { var view      = guess.with
           , game      = view.game
           , answer    = false
           , guessed   = null
@@ -125,30 +125,30 @@
 
   yes:
     function yes ()
-      {  yes.home.dom.className = "yes"
+      {  yes.with.dom.className = "yes"
       }
       ,
   no:
     function no ()
-      {  no.home.dom.className = "no"
+      {  no.with.dom.className = "no"
       }
       ,
   reset:
     function reset ()
-      {  reset.home.dom.className = "fade"
+      {  reset.with.dom.className = "fade"
       }
       ,
 
   show:
     function show (thing)
-      { var dom = show.home.dom
+      { var dom = show.with.dom
 
         dom.innerHTML
             = thing.score >= 0
             ? dom.innerHTML + '<br>' + thing.score + '%'
             : thing
 
-      ! show.ing && (show.ing = true) && show.home.reset()
+      ! show.ing && (show.ing = true) && show.with.reset()
       }
 }
 ;

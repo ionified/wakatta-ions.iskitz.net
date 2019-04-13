@@ -4,10 +4,10 @@
     { id: "wakatta.game@ions.iskitz.net"
     , by: 'mike.lee'
     , on: -7.20160902
-    , to: -7.20190330
+    , to: -7.20190413
     , at: 'ions.iskitz.net'
     , in: 'san-jose.california.usa.earth'
-    , is: +2.1
+    , is: +2.2
     , it: "implements わかった, a japanese language game"
     }
 
@@ -19,14 +19,14 @@
 
 , ready
 :   function ready (state)
-      { var     game  = ready.home
+      { var     game  = ready.with
       ; ready [state] = true
       ; ready.kana && ready.view && game.stop & game.start
       }
 
 , kana
 :   function onKana (kana)
-      { var game = onKana.home
+      { var game = onKana.with
           , alpha
           , next
           , name
@@ -51,7 +51,7 @@
 
 , show
 :   function onShow (view)
-      {   var game = onShow.home
+      {   var game = onShow.with
             , show = view.show
             , type = typeof show
 
@@ -66,7 +66,7 @@
 
 , start
 :   function start ()
-      { var game = start.home
+      { var game = start.with
 
         with (game)
           {  play()
@@ -97,7 +97,7 @@
             }
         }
 
-        var game      = play.home
+        var game      = play.with
           , show      = game.show
           , stop      = game.stop
           , hiragana  = game.romaji.gojuon
@@ -119,12 +119,12 @@
 
         (game.play = playing)()
       }
-      
+
 , skill: 0
 
 , score
 :   function score (answer)
-      {  var game = score.home
+      {  var game = score.with
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
       ;  game.skill = Math.round ((score.correct / game.answers) * 100)
