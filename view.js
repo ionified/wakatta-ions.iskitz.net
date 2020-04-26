@@ -2,12 +2,12 @@
 ~
 { re:
     { id: 'wakatta.view@ions.iskitz.net'
-    , is: "A web interface for, わかった, a japanese language game"
-    , by: 'mike.lee@iskitz'
-    , on: '2016.09.04-07'
-    , to: '2019.04.13-07'
+    , by: 'mike.lee'
+    , on: -7.20160904
+    , to: -7.201910171358
+    , at: +2.3
     , in: 'san-jose.california.usa.earth'
-    , at: +2.2
+    , is: "A web interface for, わかった, a japanese language game"
     }
 
 , do    : 'sense'
@@ -99,24 +99,29 @@
     ,
 
   guess:
-    function guess (move)
+    function guess (moved)
       { var view      = guess.with
           , game      = view.game
           , answer    = false
           , guessed   = null
           , swipeSize = 10
 
-        if (Math.abs (move.y) >= swipeSize)
+        if (Math.abs (moved.y) >= swipeSize)
           {  game.stop()
-          ;  guessed  = move.y < 0
+          ;  guessed  = moved.y < 0
           ;  answer = guessed == game.answer
           ;  answer ? +view.yes : +view.no
           ;  view.show ({score: game.score (answer)})
           }
 
-        if (answer && (Math.abs (move.x) >= swipeSize))
-          {  game.speed += move.x * swipeSize
+        if (answer && (Math.abs (moved.x) >= swipeSize))
+          {  game.speed += moved.x * swipeSize
           ;  view.dom.style.animationDuration = (game.speed / 2000) + 's'
+          }
+
+        if (Math.abs (moved.y) < swipeSize)
+          {  game.stop()
+          ~ /todo: show game options view/
           }
 
         return guessed
