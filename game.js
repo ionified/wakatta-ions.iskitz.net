@@ -1,14 +1,20 @@
 ;
 ~
 { re:
-    { id: "wakatta.game@ions.iskitz.net"
-    , by: 'mike.lee'
-    , on: -7.20160902
-    , to: -7.20190413
-    , at: 'ions.iskitz.net'
-    , in: 'san-jose.california.usa.earth'
-    , is: +2.2
-    , it: "implements わかった, a japanese language game"
+    { id:  'wakatta.game@ions.iskitz.net'
+    , by: ['mike.lee','kaito.lee']
+    , in:  'san-jose.california.usa.earth'
+    , on:  -7.20160902
+    , to:  -7.20220708
+    , at:  +4.00
+    , is:  "わかった, a japanese language skills game"
+    , we:
+        [ "were implementing skill switching()"
+        , "must ..."
+        , "will ..."
+        , "like ..."
+        , "wont ..."
+        ]
     }
 
 , on:
@@ -19,14 +25,14 @@
 
 , ready
 :   function ready (state)
-      { var     game  = ready.with
+      { var     game  = ready.with.its
       ; ready [state] = true
       ; ready.kana && ready.view && game.stop & game.start
       }
 
 , kana
 :   function onKana (kana)
-      { var game = onKana.with
+      { var game = onKana.with.its
           , alpha
           , next
           , name
@@ -51,7 +57,7 @@
 
 , show
 :   function onShow (view)
-      {   var game = onShow.with
+      {   var game = onShow.with.its
             , show = view.show
             , type = typeof show
 
@@ -66,7 +72,7 @@
 
 , start
 :   function start ()
-      { var game = start.with
+      { var game = start.with.its
 
         with (game)
           {  play()
@@ -97,7 +103,7 @@
             }
         }
 
-        var game      = play.with
+        var game      = play.with.its
           , show      = game.show
           , stop      = game.stop
           , hiragana  = game.romaji.gojuon
@@ -118,13 +124,21 @@
           }
 
         (game.play = playing)()
-      }
+      },
 
-, skill: 0
+  switch:
+    function switching ()
+      { var game  = switching.with.its
+          , kana  = game.kana
+          , left  = kana.left  || (kana.left  = game.romaji  .gojuon)
+          , right = kana.right || (kana.right = game.hiragana.gojuon)
+      },
 
-, score
-:   function score (answer)
-      {  var game = score.with
+  skill: 0,
+
+  score:
+    function score (answer)
+      {  var game = score.with.its
       ;  !score.correct && (score.correct = 0)
       ;  answer && ++score.correct
       ;  game.skill = Math.round ((score.correct / game.answers) * 100)

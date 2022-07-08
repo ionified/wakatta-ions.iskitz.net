@@ -4,10 +4,17 @@
     { id: 'wakatta.view@ions.iskitz.net'
     , by: 'mike.lee'
     , on: -7.20160904
-    , to: -7.201910171358
-    , at: +2.3
+    , to: -7.20220707
+    , at: +3.00
     , in: 'san-jose.california.usa.earth'
     , is: "A web interface for, わかった, a japanese language game"
+    , we:
+        [ "were implementing skill switching via guess() pausing"
+        , "must ..."
+        , "will ..."
+        , "like ..."
+        , "wont ..."
+        ]
     }
 
 , do    : 'sense'
@@ -22,7 +29,7 @@
 
   sense:
     function sense ()
-      { var view  = sense.with
+      { var view  = sense.with.its
           , move  = view.move()
           , dom   = view.dom
 
@@ -56,7 +63,7 @@
           }
       }
 
-      var view  = move.with
+      var view  = move.with.its
         , game  = view.game
         , guess = null
         , from  = {y:null}
@@ -100,11 +107,11 @@
 
   guess:
     function guess (moved)
-      { var view      = guess.with
+      { var view      = guess.with.its
           , game      = view.game
           , answer    = false
           , guessed   = null
-          , swipeSize = 10
+          , swipeSize = 15
 
         if (Math.abs (moved.y) >= swipeSize)
           {  game.stop()
@@ -122,6 +129,7 @@
         if (Math.abs (moved.y) < swipeSize)
           {  game.stop()
           ~ /todo: show game options view/
+          console.log ("PAUSED!")
           }
 
         return guessed
@@ -130,30 +138,30 @@
 
   yes:
     function yes ()
-      {  yes.with.dom.className = "yes"
+      {  yes.with.its.dom.className = "yes"
       }
       ,
   no:
     function no ()
-      {  no.with.dom.className = "no"
+      {  no.with.its.dom.className = "no"
       }
       ,
   reset:
     function reset ()
-      {  reset.with.dom.className = "fade"
+      {  reset.with.its.dom.className = "fade"
       }
       ,
 
   show:
     function show (thing)
-      { var dom = show.with.dom
+      { var dom = show.with.its.dom
 
         dom.innerHTML
             = thing.score >= 0
             ? dom.innerHTML + '<br>' + thing.score + '%'
             : thing
 
-      ! show.ing && (show.ing = true) && show.with.reset()
+      ! show.ing && (show.ing = true) && show.with.its.reset()
       }
 }
 ;
