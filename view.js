@@ -2,30 +2,51 @@
 ~
 { re:
     { id: 'wakatta.view@ions.iskitz.net'
-    , by: 'mike.lee'
-    , on: -7.20160904
-    , to: -7.20220707
-    , at: +3.00
+    , do: 'webi interaction'
+    , by: ['🙇🏾‍♂️ יהוה 🤲🏾','mike🇬🇾👨🏾‍💻🇺🇸lee']
+    , on: -2.20160904107
+    , to: -1.57831004408
+    , at: +4.000
     , in: 'san-jose.california.usa.earth'
-    , is: "A web interface for, わかった, a japanese language game"
-    , we:
+    , is: "a web interface for, わかった, a japanese language game"
+    , go:
+        { meet: 'https://meet.ionify.net/'
+        , seek: 'https://seek.ionify.net/'
+        , deal: 'https://deal.ionify.net/'
+        , play: 'https://ionified.github.io/wakatta-ions.iskitz.net/'
+        , help: 'https://github.com/ionified/wakatta-ions.iskitz.net/issues'
+      //, test: 'https://github.com/ionified/wakatta-ions.iskitz.net/blob/public/view.test.js'
+        , code: 'https://github.com/ionified/wakatta-ions.iskitz.net/blob/public/view.js'
+        },
+      we:
         [ "were implementing skill switching via guess() pausing"
         , "must ..."
-        , "will ..."
+        , "will retire .share() once with@ name-to-reference resolution's ready"
         , "like ..."
         , "wont ..."
         ]
+    },
+
+  with:
+    { our:
+        { wakatta:
+            { view: 'my@'
+            }
+        }
     }
 
-, do    : 'sense'
+, do    :['share', 'sense']
 , dom   : this && this.document &&  this.document.body
 , title : this && this.document && (this.document.title = "わかった")
-,
+, errors:
+    { noDOM: "wakatta uses the dom:'document object module' for display & interaction but found none"
+    },
 
-  errors:
-    { noDOM: "Wakatta uses the DOM:'Document Object Module' for display + interaction but found none."
-    }
-    ,
+  share:function
+  share()
+    { var via   =   share.with
+        ; via.our.wakatta.view = via.my
+    },
 
   sense:
     function sense ()
@@ -115,7 +136,7 @@
 
         if (Math.abs (moved.y) >= swipeSize)
           {  game.stop()
-          ;  guessed  = moved.y < 0
+          ;  guessed  = moved.y > 0
           ;  answer = guessed == game.answer
           ;  answer ? +view.yes : +view.no
           ;  view.show ({score: game.score (answer)})
