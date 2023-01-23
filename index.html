@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head lang="ja">
     <meta charset="utf-8">
     <meta name="application-name"                       content="わかった！" 　           lang="ja">
     <meta name="application-name"                       content="¡Wakatta! I got it!" 　lang="en">
     <meta name="mobile-web-app-capable"                 content="yes">
     <meta name="apple-mobile-web-app-capable"           content="yes">
     <meta name="apple-mobile-web-app-status-bar-style"  content="default">
-    <meta name="viewport"                               content="width=device-width">
+    <meta name="viewport"                               content="width=device-width, initial-scale=1">
 
     <!--link rel="icon"          type="image/ico" href="/images/favicon.ico"-->
     <!--link rel="shortcut icon" type="image/ico" href="/images/favicon.ico"-->
-    <link rel="stylesheet"    href="view.css">
+    <link href="view.css" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
+    <!--link href="view.css" rel="preload" as="style" onload="this.rel='stylesheet'"-->
 
     <title>わかった</title>
   </head>

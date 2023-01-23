@@ -1,31 +1,32 @@
 @charset "UTF-8";
 
 /*
-id: wakatta.view.css@ions.iskitz.net
-by: mike.lee@iskitz
-at: 2018.10.13+09...2017.11.11-07
-im: going to try absolute positioning to ensure full page swipe detection.
+id:   wakatta.view.css@ions.iskitz.net
+by:   🙇🏾‍♂️ יהוה 🤲🏾 & michael🇬🇾👨🏾‍💻🇺🇸lee@iskitz
+on: { 201711117.2 : -7 }
+to: { 578311012.1 : -8 }
+go:   https://github.com/ionified/wakatta-ions.iskitz.net/
+is:   setting html & body height to 100% to ensure full page swipe detection
+we:   seek vertically & horizontally -centered text display
 */
 
 
 html, body
-  { border   : 0px solid #f00 /*debug*/
-  ; height   : 100%
-  ; width    : 100%
-  ; margin   : 0
-  ; padding  : 0
-  ; overflow : hidden
+  { box-sizing    : border-box
+  ; margin        : 0
+  ; border        : 0px solid #f00 /*seek*/
+  ; padding       : 0
+  ; height        : 100%
   ; overscroll-behavior: none
   }
 
 body
   { animation-name: unset
-  ; border        : 0px solid #0f0 /*debug*/
   ; color         : #777
-  ; font-family   : "Hiragino Mincho ProN"
+  ; font-family   : "hiragino mincho pron", ui-rounded, cursive
   ; font-size     : 5em
-  ; height        : 20%
-  ; padding       : 47% 0
+  ; border        : 0px solid #0f0 /*seek*/
+  ; padding-top   : 46%
   ; text-align    : center
   }
 body.fade
