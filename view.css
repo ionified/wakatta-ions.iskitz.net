@@ -12,46 +12,47 @@ we:   seek vertically & horizontally -centered text display
 
 
 html, body
-  { box-sizing    : border-box
-  ; margin        : 0
-  ; border        : 0px solid #f00 /*seek*/
-  ; padding       : 0
-  ; height        : 100%
-  ; overscroll-behavior: none
+  { box-sizing          : border-box
+  ; margin              : 0
+  ; border              : 0px solid #f00 /*seek*/
+  ; padding             : 0
+  ; height              : 100%
+  ; overscroll-behavior : none
   }
 
 body
-  { animation-name: unset
-  ; color         : #777
-  ; font-family   : "hiragino mincho pron", ui-rounded, cursive
-  ; font-size     : 5em
-  ; border        : 0px solid #0f0 /*seek*/
-  ; padding-top   : 46%
-  ; text-align    : center
+  { animation-name      : unset
+  ; background-color    : #000
+  ; color               : chocolate
+  ; font-family         : "hiragino mincho pron", ui-rounded, cursive
+  ; font-size           : 5em
+  ; border              : 0px solid #0f0 /*seek*/
+  ; padding-top         : 46%
+  ; text-align          : center
   }
 body.fade
-  { animation     : 2.5s infinite alternate fade
+  { animation           : 2.5s infinite alternate fade
   }
 body.yes
-  { animation-name: none
-  ; color         : #4c4
+  { animation-name      : none
+  ; color               : #4c4
   }
 body.no
-  { animation-name: none
-  ; color         : #c44
+  { animation-name      : none
+  ; color               : darkred
   }
 
 @keyframes fade
   { from
-      { color     : #fff
-      ; opacity   : 0%
+      { color           : #111
+      ; opacity         : 0%
       }
-  /*50%
-      { color     : #ccc
-      ; opacity   : 50%
+ /*50%
+      { color           : chocolate
+      ; opacity         : 50%
       }*/
     to
-      { color     : #777
-      ; opacity   : 100%
+      { color           : chocolate
+      ; opacity         : 100%
       }
   }
